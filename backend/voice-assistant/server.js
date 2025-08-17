@@ -136,13 +136,24 @@ app.post('/chat', async (req, res) => {
 app.post('/tts', async (req, res) => {
   try {
     const { text, lang } = req.body;
-    const mp3 = await tts(text, lang); // override
+    if (!text) return res.status(400).json({ error: "Missing text" });
+    const mp3 = await tts(text, lang);
     res.set('Content-Type', 'audio/mpeg').send(mp3);
   } catch (err) {
     console.error("TTS failed:", err);
-    res.status(500).send("TTS error");
+    res.status(500).json({ error: "TTS error", details: err.message });
   }
 });
+// app.post('/tts', async (req, res) => {
+//   try {
+//     const { text, lang } = req.body;
+//     const mp3 = await tts(text, lang); // override
+//     res.set('Content-Type', 'audio/mpeg').send(mp3);
+//   } catch (err) {
+//     console.error("TTS failed:", err);
+//     res.status(500).send("TTS error");
+//   }
+// });
 
 //WEBSOCKET SERVER 
 const httpServer = createServer(app);

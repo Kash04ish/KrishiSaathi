@@ -1,10 +1,13 @@
 import Sanscript from 'sanscript';
 import { useState, useRef, useEffect } from "react";
 import { FiMic, FiSend, FiAlertCircle } from "react-icons/fi";
-import { BsCapsule, BsPhone, BsFlower1, BsPlusCircle } from "react-icons/bs";
-import { FaRegClock, FaBed, FaUtensils } from "react-icons/fa";
+import { GiPlantSeed, GiFertilizerBag, GiBugNet, GiFarmTractor, GiPlantWatering } from "react-icons/gi";
+import { WiRaindrop } from "react-icons/wi";
+import { FaRupeeSign, FaLandmark } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import.meta.env.VITE_API_URL;
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Assistant = () => {
   //for navigation
@@ -15,7 +18,7 @@ const Assistant = () => {
 
   // Default Message at first
   const [messages, setMessages] = useState([
-    { from: "bot", text: "Namaste! SehatSathi here. How can I help you manage your health today?" }
+    { from: "bot", text: "Namaste! KrishiSaathi here. How can I help you manage your farm today?" }
   ]);
   
   //connect to websocket stt_server audio
@@ -42,7 +45,9 @@ const Assistant = () => {
     const worklet = new AudioWorkletNode(audioContext, "pcm-processor");
 
     // const ws = new WebSocket("ws://localhost:2700");
-    const ws = new WebSocket(`${import.meta.env.VITE_API_URL.replace(/^http/, 'ws')}/ws/stt`);
+    // const ws = new WebSocket(`${import.meta.env.VITE_API_URL.replace(/^http/, 'ws')}/ws/stt`);
+    const ws = new WebSocket(`${API_URL.replace(/^http/, 'ws')}/ws/stt`);
+
 
     // const ws = new WebSocket(
     //   process.env.NODE_ENV === 'production'
@@ -66,8 +71,9 @@ const Assistant = () => {
       setIsRecording(true);
     };
 
-    ws.onmessage = (event) => {
+ws.onmessage = (event) => {
   let jsonString;
+
   if (event.data instanceof ArrayBuffer) {
     const decoder = new TextDecoder('utf-8');
     jsonString = decoder.decode(event.data);
@@ -80,10 +86,10 @@ const Assistant = () => {
 
     console.log("STT raw:", text); 
 
-     const isRoman = /^[a-zA-Z\s]+$/.test(text);
-        const output = sttLang === 'hi'
-          ? (isRoman ? Sanscript.t(text, 'itrans', 'devanagari') : text)
-          : text;  
+    const isRoman = /^[a-zA-Z\s]+$/.test(text);
+    const output = sttLang === 'hi'
+      ? (isRoman ? Sanscript.t(text, 'itrans', 'devanagari') : text)
+      : text;  
 
     console.log("STT converted:", output);
 
@@ -94,10 +100,12 @@ const Assistant = () => {
       stopRecording();
       sendToChat(output);
     }
+
   } catch (err) {
     console.error("Failed to parse WebSocket message:", err, jsonString);
   }
 };
+
 
     // ws.onmessage = (event) => {
     //   const { text, final } = JSON.parse(event.data);
@@ -137,7 +145,7 @@ const Assistant = () => {
     setMessages(prev => [...prev, { from: "user", text }]);
     setInputText("");
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/chat`, {
+      const res = await fetch(`${API_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text })
@@ -154,7 +162,7 @@ const Assistant = () => {
 
   const playTTS = async (text, lang = "en") => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/tts`, {
+      const res = await fetch(`${API_URL}/tts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // body: JSON.stringify({ text })
@@ -182,7 +190,7 @@ const Assistant = () => {
     <div className="min-h-50 bg-gray-50 text-gray-900 font-sans p-6 flex flex-col md:flex-row gap-6">
       {/* Left Part: Chat Area  */}
       <div className="flex-1 bg-white rounded-xl shadow-md p-6 flex flex-col">
-        <h2 className="text-xl font-bold mb-4">💬 SehatSathi Assistant</h2>
+        <h2 className="text-xl font-bold mb-4">💬 KrishiSaathi Assistant</h2>
         <div ref={chatRef} className="flex-1 overflow-y-auto space-y-4 pr-2 max-h-[400px]">
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.from === "bot" ? "justify-start" : "justify-end"}`}>
@@ -242,34 +250,34 @@ const Assistant = () => {
         onClick={handleGoToDailyInfo}
         className="cursor-pointer bg-white border rounded-xl shadow p-4 hover:shadow-lg transition"
         >
-          <h3 className="text-lg font-semibold mb-4">📊 Daily Health Timeline</h3>
+          <h3 className="text-lg font-semibold mb-4">🌱 Daily Farm Timeline</h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2">
-              <BsCapsule className="mt-1 text-teal-600" />
+              <GiPlantSeed className="mt-1 text-green-700" />
               <div>
-                <p className="font-medium">Medicine Logged</p>
-                <p className="text-gray-500 text-xs">Dolo 650 (morning dose) • 10:03 AM</p>
+                <p className="font-medium">Crop Sown</p>
+                <p className="text-gray-500 text-xs">Wheat seeds planted • 07:30 AM</p>
               </div>
             </li>
             <li className="flex items-start gap-2">
-              <FaUtensils className="mt-1 text-yellow-600" />
+              <GiFertilizerBag className="mt-1 text-yellow-600" />
               <div>
-                <p className="font-medium">Meal Recorded</p>
-                <p className="text-gray-500 text-xs">Lunch: Rice, Dal, Sabzi • 12:45 PM</p>
+                <p className="font-medium">Fertilizer Applied</p>
+                <p className="text-gray-500 text-xs">Urea (safe dosage) • 10:00 AM</p>
               </div>
             </li>
             <li className="flex items-start gap-2">
-              <FaBed className="mt-1 text-blue-500" />
+              <WiRaindrop className="mt-1 text-blue-500" />
               <div>
-                <p className="font-medium">Sleep Goal</p>
-                <p className="text-gray-500 text-xs">7.5 hours • 07:00 AM</p>
+                <p className="font-medium">Irrigation</p>
+                <p className="text-gray-500 text-xs">Field watered • 02:15 PM</p>
               </div>
             </li>
             <li className="flex items-start gap-2">
-              <FaRegClock className="mt-1 text-orange-500" />
+              <GiBugNet className="mt-1 text-orange-500" />
               <div>
-                <p className="font-medium">Next Medicine Due</p>
-                <p className="text-gray-500 text-xs">Multivitamin (evening dose) • 08:00 PM</p>
+                <p className="font-medium">Next Task</p>
+                <p className="text-gray-500 text-xs">Pesticide spray due • 06:00 PM</p>
               </div>
             </li>
           </ul>
@@ -279,19 +287,21 @@ const Assistant = () => {
           <h3 className="text-lg font-semibold mb-3">⚡ Quick Actions</h3>
           <div className="flex flex-wrap gap-2 text-sm">
             <button className="border px-3 py-1 rounded hover:bg-gray-100 flex items-center gap-1">
-              <BsCapsule /> Ask About Meds Info
+              <GiPlantSeed  /> Ask Agri-Query
             </button>
             <button className="border px-3 py-1 rounded hover:bg-gray-100 flex items-center gap-1">
-              <FaUtensils /> Diet Info
+              <FaLandmark /> Govt. Schemes
             </button>
             <button className="border px-3 py-1 rounded hover:bg-gray-100 flex items-center gap-1">
-              <BsPhone /> Share Your Thoughts
+              <GiFertilizerBag  /> Fertilizer & Pesticides Info 
             </button>
-            <button className="border px-3 py-1 rounded hover:bg-gray-100 flex items-center gap-1">
-              <BsPlusCircle /> New Chat
+            <button className="border px-2 py-1 rounded hover:bg-gray-100 flex items-center gap-1">
+              <FaRupeeSign  />  Market News
             </button>
-            <button className="border px-3 py-1 rounded hover:bg-gray-100 flex items-center gap-1">
-              <BsFlower1 />	 Talk Mental & Physical Wellbeing
+            
+            <button className="border px-2 py-1 rounded hover:bg-gray-100 flex items-center gap-1">
+              <GiPlantWatering  /> Talk Crop Wellbeing
+
             </button>
           </div>
         </div>
@@ -299,7 +309,7 @@ const Assistant = () => {
         <div className="bg-yellow-100 border-l-4 border-yellow-500 p-3 text-sm text-yellow-800 rounded-md flex items-start gap-2">
           <FiAlertCircle className="mt-0.5" />
           <span>
-            <strong>Alert:</strong> Ramu Kaka missed his evening medicine. Alert sent to Amit.
+            <strong>Alert:</strong> Farmer Ram missed his pesticide spray. 
           </span>
         </div>
       </aside>

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
 const links = [
-  { label: "Family Logs", target: "family-dashboard" },
-  { label: "AI Health Updates", target: "ai-health-updates" },
+  { label: "AI Updates", target: "ai-health-updates" },
   { label: "Daily Info", target: "daily-info" },
-  { label: "Elder Support", target: "elder-support" },
+  { label: "Farmer's Support", target: "elder-support" },
 ];
 
 export default function Sidebar() {
@@ -32,7 +31,7 @@ export default function Sidebar() {
 
   return (
     <aside className="w-60 bg-white text-gray-800 h-screen p-6 sticky top-0 border-r border-gray-200">
-      <div className="text-xl font-bold mb-10">SehatSathi</div>
+      <div className="text-xl font-bold mb-10">KrishiSaathi</div>
       <nav className="flex flex-col gap-5 text-base">
         {links.map(({ label, target }) => (
           <a

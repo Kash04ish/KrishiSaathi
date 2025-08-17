@@ -6,30 +6,26 @@ const DailyInfo = () => {
     navigate("/scanner"); 
   };
   return (
-    <div id="daily-info" className=" bg-gray-50 p-6 pt-6 pb-10">
-      {/* <h1 className="text-3xl font-semibold text-center text-gray-800 mb-10">
-        Daily Info
-      </h1> */}
-
+    <div id="daily-info" className="bg-gray-50 p-6 pt-6 pb-10">
       <div className="flex flex-wrap gap-8 justify-center">
 
-        {/* Medicine Info Card */}
+        {/* Crop Activity Card */}
         <div className="bg-white shadow-md rounded-2xl p-6 w-80 max-h-96 overflow-y-auto flex flex-col">
-          <h2 className="text-xl font-bold text-gray-800 mb-1">💊 Medicine Info</h2>
-          <p className="text-sm text-gray-500 mb-4">Today’s schedule & search tool</p>
+          <h2 className="text-xl font-bold text-gray-800 mb-1">🌾 Crop Activity</h2>
+          <p className="text-sm text-gray-500 mb-4">Today’s farm schedule & quick search</p>
 
           <div className="space-y-4 text-sm text-gray-700">
             {[
-              { name: "Metformin", dose: "1 tablet", time: "8:00 AM" },
-              { name: "Amlodipine", dose: "½ tablet", time: "9:00 AM" },
-              { name: "Multivitamin", dose: "1 tablet", time: "9:00 PM" },
-            ].map((med, idx) => (
+              { name: "Wheat Sowing", detail: "Field 2", time: "7:30 AM" },
+              { name: "Irrigation", detail: "Canal water", time: "2:15 PM" },
+              { name: "Pesticide Spray", detail: "Bio-insecticide", time: "6:00 PM" },
+            ].map((task, idx) => (
               <div key={idx} className="flex justify-between">
                 <div>
-                  <p className="font-medium">{med.name}</p>
-                  <p className="text-xs text-gray-500">{med.dose}</p>
+                  <p className="font-medium">{task.name}</p>
+                  <p className="text-xs text-gray-500">{task.detail}</p>
                 </div>
-                <p className="text-sm">{med.time}</p>
+                <p className="text-sm">{task.time}</p>
               </div>
             ))}
           </div>
@@ -37,32 +33,31 @@ const DailyInfo = () => {
           <div className="mt-5 space-y-2">
             <input
               type="text"
-              placeholder="Search medicine..."
+              placeholder="Search crops/pesticides..."
               className="w-full border rounded px-3 py-2 text-sm focus:outline-teal-500"
             />
             <button
               onClick={handleGoToScanner}
               className="w-full border rounded px-3 py-2 text-sm flex items-center justify-center gap-2 bg-gray-50 hover:bg-gray-100 transition cursor-pointer"
             >
-              <span>📷 Scan Medicine</span> 
+              <span>📷 Scan Crop/Pesticides</span> 
             </button>
-
           </div>
         </div>
 
-        {/* Mood Trends Card */}
+        {/* Weather Trends Card */}
         <div className="bg-white shadow-md rounded-2xl p-6 w-80">
-          <h2 className="text-xl font-bold text-center text-gray-800 mb-1">😊 Mood Trends</h2>
-          <p className="text-sm text-center text-gray-500 mb-4">(1–5 scale)</p>
+          <h2 className="text-xl font-bold text-center text-gray-800 mb-1">🌦️ Weather Trends</h2>
+          <p className="text-sm text-center text-gray-500 mb-4">Temperature (°C) this week</p>
 
-          <div className="text-center text-2xl mb-4">🙂 Happy</div>
+          <div className="text-center text-2xl mb-4">🌤️ 32°C</div>
 
           <div className="flex items-end justify-between h-32">
-            {[3, 4, 3, 5, 4, 4, 5].map((val, idx) => (
+            {[30, 32, 31, 33, 34, 32, 31].map((val, idx) => (
               <div
                 key={idx}
-                className="w-6 bg-teal-600 rounded"
-                style={{ height: `${val * 20}px` }}
+                className="w-6 bg-blue-400 rounded"
+                style={{ height: `${val * 3}px` }}
               ></div>
             ))}
           </div>
@@ -72,17 +67,17 @@ const DailyInfo = () => {
           </div>
         </div>
 
-        {/* Sleep Overview Card */}
+        {/* Irrigation Overview Card */}
         <div className="bg-white shadow-md rounded-2xl p-6 w-80">
-          <h2 className="text-xl font-bold text-center text-gray-800 mb-1">🌙 Sleep Overview</h2>
-          <p className="text-sm text-center text-gray-500 mb-4">Hours per night</p>
+          <h2 className="text-xl font-bold text-center text-gray-800 mb-1">💧 Irrigation Overview</h2>
+          <p className="text-sm text-center text-gray-500 mb-4">Hours irrigated per day</p>
 
           <div className="flex items-end justify-between h-32">
-            {[6, 6.5, 7, 7.2, 7.5, 7, 8].map((val, idx) => (
+            {[1, 1.5, 2, 1.2, 1.8, 2, 1.6].map((val, idx) => (
               <div
                 key={idx}
-                className="w-6 bg-purple-400 rounded"
-                style={{ height: `${val * 10}px` }}
+                className="w-6 bg-teal-400 rounded"
+                style={{ height: `${val * 30}px` }}
               ></div>
             ))}
           </div>
@@ -92,46 +87,44 @@ const DailyInfo = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-5xl bg-white rounded-xl shadow-inner px-6 py-5 text-center mt-8 border border-dashed border-teal-300">
-          <h2 className="text-xl font-semibold text-red-800 mb-2">🚧 More Daily Updates Coming Soon</h2>
-          <p className="text-sm text-gray-600">
-            Stay tuned for features like Vitals Summary, Meal Tracker, Step Counter, and more SehatSathi wellness insights. Your care, continuously evolving.
-          </p>
-        </div>
-
-        {/* Vitals Summary Card */}
+        {/* Farm Reminders Card */}
         <div className="bg-white shadow-md rounded-2xl p-6 w-80">
-          <h2 className="text-xl font-bold text-center text-gray-800 mb-1">🩺 Vitals Summary</h2>
-          <p className="text-sm text-center text-gray-500 mb-4">Latest self-monitor logs</p>
-
-          <div className="space-y-3 text-sm text-gray-700">
-            <div className="flex justify-between">
-              <span className="font-medium">Blood Pressure</span>
-              <span>124/82 mmHg</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-medium">Pulse</span>
-              <span>76 bpm</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-medium">Blood Sugar</span>
-              <span>92 mg/dL</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Meal Tracker Card */}
-        <div className="bg-white shadow-md rounded-2xl p-6 w-80">
-          <h2 className="text-xl font-bold text-center text-gray-800 mb-1">🍽️ Meal Tracker</h2>
-          <p className="text-sm text-center text-gray-500 mb-4">Meals logged today</p>
-
+          <h2 className="text-xl font-bold text-center text-gray-800 mb-1">⏰ Farm Reminders</h2>
+          <p className="text-sm text-center text-gray-500 mb-4">Upcoming tasks</p>
           <ul className="space-y-2 text-sm text-gray-700">
-            <li><span className="font-medium">Breakfast:</span> Poha & Banana</li>
-            <li><span className="font-medium">Lunch:</span> Dal, Rice, Curd</li>
-            <li><span className="font-medium">Dinner:</span> Khichdi & Papad</li>
+            <li><span className="font-medium">Tomorrow:</span> Field weeding at 8:00 AM</li>
+            <li><span className="font-medium">Friday:</span> Soil test in Field 1</li>
+            <li><span className="font-medium">Saturday:</span> Market visit for seeds</li>
           </ul>
         </div>
 
+        {/* Crop Progress Card */}
+        <div className="bg-white shadow-md rounded-2xl p-6 w-80">
+          <h2 className="text-xl font-bold text-center text-gray-800 mb-1">📈 Crop Progress</h2>
+          <p className="text-sm text-center text-gray-500 mb-4">Growth status</p>
+          <div className="space-y-3 text-sm text-gray-700">
+            <div className="flex justify-between">
+              <span className="font-medium">Wheat</span>
+              <span>Healthy</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="font-medium">Rice</span>
+              <span>Needs irrigation</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="font-medium">Mustard</span>
+              <span>Flowering</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Coming Soon Card */}
+        <div className="w-full max-w-5xl bg-white rounded-xl shadow-inner px-6 py-5 text-center mt-8 border border-dashed border-teal-300">
+          <h2 className="text-xl font-semibold text-red-800 mb-2">🚧 More Farm Updates Coming Soon</h2>
+          <p className="text-sm text-gray-600">
+            Stay tuned for features like Crop Disease Alerts, Market Price Tracker, and more KrishiSaathi insights. Your farm, continuously evolving.
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ router.post('/analyze', upload.single('file'), async (req, res) => {
         {
           role: 'system',
           content:
-            'You are a pharmacist information extractor.\n' +
+            'You are an agricultural information extractor.\n' +
             'Return ONLY valid JSON, no markdown.\n' +
             'type Medicine = {\n' +
             '  name: string;\n' +

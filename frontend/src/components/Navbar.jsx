@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className="flex items-center gap-1">
           <img src={Logo2} alt="SehatSathi Logo" className="w-15" />
           <h1 className="text-xl font-bold text-teal-600">
-            <NavLink to="/">SehatSathi</NavLink>
+            <NavLink to="/">KrishiSaathi</NavLink>
           </h1>
         </div>
 

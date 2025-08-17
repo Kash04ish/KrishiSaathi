@@ -1,6 +1,5 @@
 import Sidebar from "../components/Sidebar";
 import Section from "../components/Section";
-import FamilyDashboard from "../components/dashboard/FamilyDashboard";
 import AiHealthUpdates from "../components/dashboard/AIHealthUpdates";
 import DailyInfo from "../components/dashboard/DailyInfo";
 import ElderSupport from "../components/dashboard/ElderSupport";
@@ -22,16 +21,13 @@ export default function Dashboard() {
     <div className="flex bg-white min-h-screen text-gray-800">
       <Sidebar />
       <main className="flex-1 p-6 overflow-auto scroll-smooth space-y-14">
-        <Section id="family-dashboard" title="Family Dashboard">
-          <FamilyDashboard />
-        </Section>
-        <Section id="ai-health-updates" title="AI Health Updates">
+        <Section id="ai-health-updates" title="AI Updates">
           <AiHealthUpdates />
         </Section>
         <Section id="daily-info" title="Daily Info">
           <DailyInfo />
         </Section>
-        <Section id="elder-support" title="Elder Support">
+        <Section id="elder-support" title="Farmer's Support">
           <ElderSupport />
         </Section>
       </main>

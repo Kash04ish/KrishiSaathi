@@ -1,8 +1,7 @@
-
 import { useState } from "react";
 
 const AIHealthUpdate = () => {
-  const [openSection, setOpenSection] = useState(["health", "mood"]);
+  const [openSection, setOpenSection] = useState(["farm", "weather"]);
   const [dateFilter, setDateFilter] = useState("today");
   const [typeFilter, setTypeFilter] = useState("all");
 
@@ -53,47 +52,43 @@ const AIHealthUpdate = () => {
         </div>
 
         <div className="flex flex-col">
-          <label className="text-sm font-medium mb-1 text-gray-600">Alert Type</label>
+          <label className="text-sm font-medium mb-1 text-gray-600">Update Type</label>
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
             className="border rounded px-3 py-2 text-sm bg-white focus:outline-none"
           >
             <option value="all">All</option>
-            <option value="health">Health</option>
-            <option value="mood">Mood</option>
-            <option value="proactive">Proactive</option>
+            <option value="farm">Farm</option>
+            <option value="weather">Weather</option>
+            <option value="advice">Advice</option>
           </select>
         </div>
       </div>
 
-      {/* Sections (Filter logic not applied to content yet) */}
-      <Section id="health" title="Health Snapshot">
-        <p>💊 २ में से ३ दवाइयाँ ली गई — Calpol 8 बजे लेना बाकी है</p>
-        <p>🩺 AI सुझाव: गर्मी ज़्यादा है, दिन में 3 बार पानी ज़रूर पिएं</p>
-        <p>📍 आपके शरीर में 38°C तापमान है – धूप से बचें</p>
-        <p>
-          👥 आपने वही बात 3 बार दोहराई – डॉक्टर से मिलना चाहिए?{" "}
-          <span className="text-xs text-gray-500">
-            (early dementia alert)
-          </span>
-        </p>
+      {/* Sections */}
+      <Section id="farm" title="Farm Activity Snapshot">
+        <p>🌱 गेहूं की बुवाई पूरी हुई — 07:30 AM</p>
+        <p>🧪 यूरिया खाद डाली गई — 10:00 AM</p>
+        <p>💧 सिंचाई की गई — 02:15 PM</p>
+        <p>🪲 अगला कार्य: कीटनाशक छिड़काव — 06:00 PM</p>
       </Section>
 
-      <Section id="mood" title="Mood & Activity Suggestions">
-        <p>🦶 उठिए और सिर्फ़ 10 कदम चलिए — आपका साथी हौसला बढ़ाएगा।</p>
-        <p>🍵 एक कप चाय या पानी की याद — थोड़ा तरोताज़ा हो जाइए।</p>
-        <p>🗣️ SehatSaathi से हल्की-फुल्की बातचीत करें — मन हल्का लगेगा।</p>
+      <Section id="weather" title="Weather & Field Conditions">
+        <p>🌤️ आज हल्की धूप है, तापमान 32°C</p>
+        <p>💧 मिट्टी में नमी अच्छी है, सिंचाई की आवश्यकता नहीं</p>
+        <p>🌬️ हवा की गति सामान्य</p>
       </Section>
 
-      <Section id="tips" title="Proactive Health Tips">
-        <p>🌿 ज्यादा फल और सब्ज़ियाँ खाइए।</p>
-        <p>🚰 दिन में कम से कम 8 गिलास पानी।</p>
+      <Section id="advice" title="AI Farming Tips">
+        <p>🌾 फसल की बढ़वार के लिए सप्ताह में एक बार खाद डालें।</p>
+        <p>🚰 पौधों को सुबह या शाम को पानी दें, दोपहर में नहीं।</p>
+        <p>🪲 कीट दिखें तो तुरंत जैविक कीटनाशक का प्रयोग करें।</p>
       </Section>
 
-      <Section id="progress" title="Health Progress Tracker">
-        <p>📊 BP Logs: Normal</p>
-        <p>💓 Heart Rate: Stable</p>
+      <Section id="reminders" title="Farm Reminders & Progress">
+        <p>⏰ अगला कार्य: खेत की निराई — कल सुबह 8 बजे</p>
+        <p>📊 फसल की स्थिति: स्वस्थ</p>
       </Section>
     </div>
   );

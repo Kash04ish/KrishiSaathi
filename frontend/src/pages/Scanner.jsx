@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import scannerGuideImage from "../assets/scanner-guide.png";
-import guide2 from "../assets/guide2.png";
+import scannerGuideImage from "../assets/f.png";
+import guide2 from "../assets/g.png";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Scanner = () => {
@@ -45,7 +45,7 @@ const Scanner = () => {
   }, []);
 
   const handleScan = async () => {
-    if (!medicineFile) return setError("📸 Please select a medicine image first.");
+    if (!medicineFile) return setError("📸 Please select an image first.");
     const formData = new FormData();
     formData.append("file", medicineFile);
     formData.append("userId", userId);
@@ -132,7 +132,7 @@ const Scanner = () => {
         <div className="flex-1 space-y-6">
           {/* Medicine Upload */}
           <section className="border rounded-md p-4 mr-10 bg-white">
-            <h3 className="text-lg font-semibold">💊 Upload Medicine Strip</h3>
+            <h3 className="text-lg font-semibold">🪴 Upload Image</h3>
             <p className="text-sm text-gray-500 mb-4">Click or drag an image to analyze.</p>
 
             <input
@@ -165,15 +165,15 @@ const Scanner = () => {
               onClick={handleScan}
               className="bg-teal-600 text-white mt-4 px-6 py-2 rounded hover:bg-teal-800"
             >
-              Scan Medicine →
+              Scan Crops/Pesticides →
             </button>
           </section>
 
           {/* Prescription Upload */}
           <section className="border rounded-md p-4 bg-white mr-10">
-            <h4 className="text-md font-semibold mb-2">📋 Upload Prescription</h4>
+            <h4 className="text-md font-semibold mb-2">📋 Upload Document</h4>
             <p className="text-sm text-gray-500 mb-4">
-              Upload your doctor's prescription to generate medicine reminders.
+              Upload your govt schemes to generate reminders.
             </p>
 
             <input
@@ -197,14 +197,14 @@ const Scanner = () => {
               onDragOver={(e) => e.preventDefault()}
               className="border border-dashed rounded-md h-40 flex items-center justify-center text-gray-400 text-sm bg-gray-50 cursor-pointer"
             >
-              {prescriptionFile ? <span>✅ {prescriptionFile.name}</span> : <span>📄 Click or drag & drop prescription</span>}
+              {prescriptionFile ? <span>✅ {prescriptionFile.name}</span> : <span>📄 Click or drag & drop document</span>}
             </div>
 
             <button
               onClick={handlePrescriptionUpload}
               className="bg-purple-600 text-white mt-4 px-6 py-2 text-sm rounded hover:bg-purple-700"
             >
-              Upload Prescription →
+              Upload Document →
             </button>
           </section>
         </div>
@@ -214,7 +214,7 @@ const Scanner = () => {
           {/* Scan Details */}
           <section className="border rounded-md p-4 mt-3 bg-white shadow-sm">
             <div className="flex justify-between items-center mb-3">
-              <h4 className="text-md font-semibold text-gray-800">🧪 Scanned Medicine Information</h4>
+              <h4 className="text-md font-semibold text-gray-800">🧪 Scanned Information</h4>
               {ocrResult && aiExplanation && (
                 <button
                   onClick={() => speakText(`${ocrResult}. ${aiExplanation}`)}
@@ -227,13 +227,13 @@ const Scanner = () => {
             <div className="text-sm text-gray-700 mb-3">
               <strong>OCR Result:</strong><br />
               <span className="block mt-1">
-                {ocrResult || <span className="text-gray-400">Upload a medicine strip image to get started.</span>}
+                {ocrResult || <span className="text-gray-400">Upload an image to get started.</span>}
               </span>
             </div>
             <div className="text-sm text-gray-700 whitespace-pre-line">
               <strong>AI Explanation:</strong><br />
               <span className="block mt-1">
-                {aiExplanation || <span className="text-gray-400">No explanation yet. Once medicince strip is uploaded AI will explain the medicine’s purpose and mechanism here.</span>}
+                {aiExplanation || <span className="text-gray-400">No explanation yet. Once image is uploaded AI will explain the purpose and mechanism here.</span>}
               </span>
             </div>
           </section>
@@ -241,11 +241,11 @@ const Scanner = () => {
           {/* Diet Advice */}
           <section className="border rounded-md p-4 bg-white shadow-sm">
             <div className="flex justify-between items-center mb-3">
-              <h4 className="text-md font-semibold text-gray-800">🍽️ Dietary Advice</h4>
+              <h4 className="text-md font-semibold text-gray-800">⚠ Precautions/Warnings</h4>
               {dietAdvice !== null && (
                 <button
                   onClick={() => speakText(
-                    dietAdvice || "No dietary precautions required for this medicine."
+                    dietAdvice || "No precautions required."
                   )}
                   className="text-sm font-medium text-purple-600 hover:text-white hover:bg-purple-600 px-2 py-1 rounded transition-all duration-200"
                 >
@@ -257,9 +257,9 @@ const Scanner = () => {
               <strong>Advice:</strong><br />
               <span className="block mt-1">
                 {dietAdvice === null
-                  ? "⚠️ Upload a strip to receive dietary warnings or precautions."
+                  ? "⚠️ Upload a crop image or pesticide label/container to receive warnings or precautions."
                   : dietAdvice === ""
-                  ? "✅ No dietary precautions required for this medicine."
+                  ? "✅ No precautions required for this."
                   : dietAdvice}
               </span>
             </p>
@@ -303,7 +303,7 @@ const Scanner = () => {
       </main>
         {/* Reminders*/}
         <section className="border rounded-md p-4 bg-white shadow-sm overflow-hidden mx-16 ">
-        <h4 className="text-md font-semibold mb-4">🕒 Medicine Reminders</h4>
+        <h4 className="text-md font-semibold mb-4">🕒 Document Reminders</h4>
 
         {allReminders.length === 0 ? (
           <p className="text-sm text-gray-400">No reminders found.</p>
@@ -359,8 +359,7 @@ const Scanner = () => {
       <div className="border rounded-md p-4 bg-white shadow-sm mt-10 mx-16">
         <h3 className="text-lg font-semibold text-gray-800 mb-2">🔎 Visual Guide</h3>
         <p className="text-sm text-gray-700 leading-relaxed">
-          Upload a medicine strip or prescription to extract text using OCR. AI then analyzes it to identify the medicine, its purpose, usage, and dietary warnings. Reminders are shown on the right to help you stay on track.
-        </p>
+          Upload a crop image or pesticide label/container to extract text using OCR. The AI will identify the crop or chemical, explain its purpose, usage instructions, and highlight any precautions or warnings. Reminders will appear on the right to help you manage your farming tasks.        </p>
       </div>
 
       <section className="bg-white py-6 px-4 md:px-16">
@@ -373,7 +372,7 @@ const Scanner = () => {
               alt="How to use scanner"
               className="rounded-md object-cover w-full h-auto md:h-[280px]"
             />
-            <p className="text-center text-sm text-gray-600 mt-2">📸 Scan a medicine strip</p>
+            <p className="text-center text-sm text-gray-600 mt-2">📸 Scan a chemical strip</p>
           </div>
 
           {/* Right Image - Hindi */}
@@ -383,7 +382,7 @@ const Scanner = () => {
               alt="Scanner guide copy"
               className="rounded-md object-cover w-full h-auto md:h-[280px]"
             />
-            <p className="text-center text-sm text-gray-600 mt-2">📸 दवा की पट्टी स्कैन करें</p>
+            <p className="text-center text-sm text-gray-600 mt-2">📸 रसायन की पट्टी स्कैन करें</p>
           </div>
 
         </div>

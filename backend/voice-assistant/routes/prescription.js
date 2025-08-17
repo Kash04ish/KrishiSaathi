@@ -26,8 +26,8 @@ async function handleAnalyze(req, res) {
         {
           role: 'system',
           content:
-            'You are a medical-reminder extraction service.\n' +
-            'From the incoming image, identify every medicine the patient must take.\n' +
+            'You are a agricultural-reminder extraction service.\n' +
+            'From the incoming image, identify the government schemes or the type of crop or pesticides  which is uploaded in the image. Give possible details about  the crop for its healthy  growth. If its a pesticide/chemical, mention its usage, benifits and harm \n' +
             'Return ONLY valid JSON matching this TypeScript type (no code fences, no extra keys):\n' +
             'type Reminder = { name: string; dosage: string; times: string[]; startDate: string; endDate: string; instructions: string }\n' +
             '{ reminders: Reminder[] }'
