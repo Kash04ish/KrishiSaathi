@@ -1,9 +1,6 @@
 import mela from '../../assets/mela.png';
 import satsang from '../../assets/satsang.png';
 import healthcamp from '../../assets/healthcamp.png';
-import bhajan from '../../assets/bhajan.jpg';
-import games from '../../assets/indoorgames.png';
-import yoga from '../../assets/yoga.png';
 
 const events = [
   {
@@ -23,24 +20,6 @@ const events = [
     subtitle: "Tomorrow",
     location: "Panchayat Bhawan",
     image: satsang
-  },
-];
-
-const homeActivities = [
-  {
-    title: "Morning Bhajans",
-    subtitle: "Start your day with devotional songs and folk tunes.",
-    image: bhajan
-  },
-  {
-    title: "Indoor Games",
-    subtitle: "Play chess, ludo, or carrom with family.",
-    image: games
-  },
-  {
-    title: "Gentle Yoga & Stretching",
-    subtitle: "Simple exercises for farmers and elders.",
-    image: yoga
   },
 ];
 
