@@ -97,6 +97,11 @@ mongoose.connect(process.env.MONGODB_URI, {
 //EXPRESS SERVER SETUP
 const app = express();
 
+// Root route
+app.get("/", (req, res) => {
+  res.send("✅ KrishiSaathi backend is running!");
+});
+
 app.use(cors({
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'OPTIONS'],
