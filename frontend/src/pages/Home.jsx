@@ -97,8 +97,8 @@ const Home = () => {
               <button
                 onClick={() => {
                   if (feature.btn.includes("Voice")) navigate("/assistant");
-                  else if (feature.btn.includes("Scan")) navigate("/scanner");
-                  else if (feature.btn.includes("Dashboard")) navigate("/dashboard");
+                  else if (feature.btn.includes("Crop")) navigate("/scanner");
+                  else if (feature.btn.includes("Updates")) navigate("/dashboard");
                 }}
                 className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300 transition cursor-pointer"
               >{feature.btn}

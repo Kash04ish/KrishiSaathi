@@ -28,7 +28,7 @@ const Scanner = () => {
       .then(res => setRecentIds(res.data.meds || []))
       .catch(err => console.error("Failed to fetch recent scans:", err));
 
-    axios.get(`${API_URL}/api/reminders/all`, { params: { userId } })
+    axios.get(`${API_URL}/api/reminders/recent`, { params: { userId } })
       .then(res => {
         const patched = (res.data.reminders || []).map(r => {
           const hour = new Date(r.due).getHours();

@@ -47,7 +47,7 @@ router.post('/:id/ack', async (req, res) => {
 //   }
 // });
 
-router.get("/all", async (req, res) => {
+router.get("/recent", async (req, res) => {
   const { userId } = req.query;
   try {
     const reminders = await Reminder.find({ userId }).sort({ due: 1 });
