@@ -145,7 +145,7 @@ ws.onmessage = (event) => {
     setMessages(prev => [...prev, { from: "user", text }]);
     setInputText("");
     try {
-      const res = await fetch(`${API_URL}/chat`, {
+      const res = await fetch(`${VITE_API_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text })

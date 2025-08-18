@@ -114,6 +114,7 @@ app.use(express.json({ limit: '2mb' }));
 const port = process.env.PORT || 8080;
 
 app.use(cors()); 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: '2mb' }));
 
 //API ROUTES
