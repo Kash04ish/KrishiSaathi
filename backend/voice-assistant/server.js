@@ -103,7 +103,8 @@ app.get("/", (req, res) => {
 });
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  // origin: 'http://localhost:5173',
+  origin: ["https://krishi-saathi-two.vercel.app"],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
 }));
